@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.2.19)  20 FEB 2025 08:37
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.2.19)  22 FEB 2025 22:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1299,21 +1299,31 @@ Chapter 4.
 
 ] [32
 
-] [33] (C_Programming.aux)
+] [33] [34
+
+] [35]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36]
+[37] [38]
+Underfull \vbox (badness 2326) has occurred while \output is active []
+
+ [39]
+[40] [41] (C_Programming.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `C_Programming.out' has not changed.
-(rerunfilecheck)             Checksum: 25D35099ED3BC0435E5B67E08BB2C6EB;5711.
+(rerunfilecheck)             Checksum: 07909AE7C02CA1DCE86F481FE1843C0F;5887.
  ) 
 Here is how much of TeX's memory you used:
- 43262 strings out of 409616
- 1034026 string characters out of 5778255
+ 43313 strings out of 409616
+ 1034755 string characters out of 5778255
  2069191 words of memory out of 5000000
- 64716 multiletter control sequences out of 15000+600000
+ 64767 multiletter control sequences out of 15000+600000
  569606 words of font info for 66 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  102i,8n,119p,802b,1846s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on C_Programming.pdf (36 pages).
+Output written on C_Programming.pdf (44 pages).

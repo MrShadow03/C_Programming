@@ -33,3 +33,4 @@
 \contentsline {subsection}{\numberline {4.3.1}When to Use Do-While Loop?}{31}{subsection.4.3.1}%
 \contentsline {section}{\numberline {4.4}Break and Continue Statements}{31}{section.4.4}%
 \contentsline {section}{\numberline {4.5}Nested Loops}{32}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Exercises and Solutions}{33}{section.4.6}%

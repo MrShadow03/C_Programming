@@ -1230,20 +1230,7 @@ The \ui{break} and \ui{continue} statements are used to control the flow of a lo
 \end{infobox}
 
 \section{Nested Loops}
-A nested loop is a loop inside another loop. You can use nested loops to perform more complex tasks that require multiple iterations. Here's an example of how you can use nested loops to print a pattern:
-\begin{lstlisting}[language=C, gobble=0, caption=Using Nested Loops in C]
-    #include <stdio.h>
-    
-    int main() {
-        for (int i = 1; i <= 5; i++) {
-            for (int j = 1; j <= i; j++) {
-                printf("* ");
-            }
-            printf("\n");
-        }
-        return 0;
-    }
-\end{lstlisting}
+A nested loop is a loop inside another loop. You can use nested loops to perform more complex tasks that require multiple iterations. Let's say we want to print a pattern like this.
 \begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Output]
     * \\
     * * \\
@@ -1251,6 +1238,381 @@ A nested loop is a loop inside another loop. You can use nested loops to perform
     * * * * \\
     * * * * *
 \end{tcolorbox}
+\noindent Let's analyse go through the solution step by step.
+
+\noindent\textbf{Step 1:} Take a closer look at the pattern. How many rows are there? There are 5 rows or in other words, we have 5 new lines. Isn't it? So, we need a loop that runs 5 times to print 5 new lines. So, let's print 5 new lines first.
+\begin{lstlisting}[language=C, gobble=0]
+    for (int i = 1; i <= 5; i++) {
+        printf("\n"); // <--- New line
+    }
+\end{lstlisting}
+
+\noindent\textbf{Step 2:} But wait! We also need to print certain number of stars in each row before we print a new line. Okay, so how many stars do we need to print? Take a look at the pattern again. In the first row, we need to print 1 star, in the second row, we need to print 2 stars, and so on. So, we need to print \ui{i} stars in the \ui{i}th row. So our loop will start from 1 and run till the current row number. Let's print the stars now.
+\begin{lstlisting}[language=C, gobble=0]
+    for (int i = 1; i <= 5; i++) {
+
+        // start: inner loop to print stars
+        for (int j = 1; j <= i; j++) {
+            printf("* ");
+        }
+        // end: inner loop
+
+        printf("\n"); // <--- New line
+    }
+\end{lstlisting}
+
+\section {Exercises and Solutions}
+\textbf{Exercise 1: Write a program to print the numbers from 1 to 10 using a while loop.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    1 2 3 4 5 6 7 8 9 10
+\end{tcolorbox}
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 1]
+    #include <stdio.h>
+    
+    int main() {
+        int i = 1;
+        while (i <= 10) {
+            printf("%d ", i);
+            i++;
+        }
+        return 0;
+    }
+\end{lstlisting}
+
+\clearpage
+
+\noindent\textbf{Exercise 2: Write a program in C to display n terms of natural numbers and their sum.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter the number of terms: 5 \\
+    The first 5 natural numbers are: 1 2 3 4 5 \\
+    The sum of the first 5 natural numbers is: 15
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 2]
+    #include <stdio.h>
+    
+    int main() {
+        int n, sum = 0;
+        printf("Enter the number of terms: ");
+        scanf("%d", &n);
+        printf("The first %d natural numbers are: ", n);
+        for (int i = 1; i <= n; i++) {
+            printf("%d ", i);
+            sum += i;
+        }
+        printf("\nThe sum of the first %d natural numbers is: %d\n", n, sum);
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 3: Write a program in C to display the multiplication table for a given integer.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter an integer: 7 \\
+    Multiplication table for 7: \\
+    7 x 1 = 7 \\
+    7 x 2 = 14 \\
+    7 x 3 = 21 \\
+    7 x 4 = 28 \\
+    7 x 5 = 35 \\
+    7 x 6 = 42 \\
+    7 x 7 = 49 \\
+    7 x 8 = 56 \\
+    7 x 9 = 63 \\
+    7 x 10 = 70
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 3]
+    #include <stdio.h>
+    
+    int main() {
+        int n;
+        printf("Enter an integer: ");
+        scanf("%d", &n);
+        printf("Multiplication table for %d:\n", n);
+        for (int i = 1; i <= 10; i++) {
+            printf("%d x %d = %d\n", n, i, n * i);
+        }
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 4: Write a program in C to check if the number is a prime number or not. A prime number is a number that is greater than 1 and divisible by 1 and itself only.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter a number: 7 \\
+    7 is a prime number.
+\end{tcolorbox}
+or
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter a number: 6 \\
+    6 is not a prime number.
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 4]
+    #include <stdio.h>
+    
+    int main() {
+        int n, isPrime = 1;
+        printf("Enter a number: ");
+        scanf("%d", &n);
+
+        // Check if the number is divisible by any number other than 1 and itself
+        for (int i = 2; i <= n / 2; i++) {
+            if (n % i == 0) {
+                isPrime = 0;
+                break;
+            }
+        }
+
+        // Output the result
+        if (n == 1) {
+            printf("%d is not a prime number.\n", n);
+        } else if (isPrime) {
+            printf("%d is a prime number.\n", n);
+        } else {
+            printf("%d is not a prime number.\n", n);
+        }
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 5: Write a program in C to display the Fibonacci sequence up to a certain number of terms. The Fibonacci sequence is a series of numbers in which each number is the sum of the two preceding ones, usually starting with 0 and 1.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter the number of terms: 10 \\
+    Fibonacci sequence up to 10 terms: 0 1 1 2 3 5 8 13 21 34
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 5]
+    #include <stdio.h>
+    
+    int main() {
+        int n, t1 = 0, t2 = 1, nextTerm;
+        printf("Enter the number of terms: ");
+        scanf("%d", &n);
+        printf("Fibonacci sequence up to %d terms: ", n);
+        for (int i = 1; i <= n; i++) {
+            printf("%d ", t1);
+            nextTerm = t1 + t2;
+            t1 = t2;
+            t2 = nextTerm;
+        }
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 6: Write a program in C to display the following pattern using nested loops.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    1 \\
+    1 2 \\
+    1 2 3 \\
+    1 2 3 4 \\
+    1 2 3 4 5
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 6]
+    #include <stdio.h>
+    
+    int main() {
+        for (int i = 1; i <= 5; i++) {
+            for (int j = 1; j <= i; j++) {
+                printf("%d ", j);
+            }
+            printf("\n");
+        }
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 7: Write a program in C to display the following pattern using nested loops.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+\begin{verbatim}
+   1
+  2 3
+ 4 5 6
+7 8 9 10
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 7]
+    #include <stdio.h>
+    
+    int main() {
+        int n = 4;
+        int k = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                printf(" ");
+            }
+            for (int j = 1; j <= i; j++) {
+                printf("%d ", k++);
+            }
+            printf("\n");
+        }
+        return 0;
+    }
+\end{lstlisting}
+
+\begin{infobox}
+    In the above solution, we use two nested loops. The outer loop runs from 1 to 4 (number of rows) and the inner loop runs from 1 to \ui{n - i} to print the spaces before the numbers. The second inner loop runs from 1 to \ui{i} to print the numbers. \ui{k++} is used to print the current value of \ui{k} and increment it by 1.
+\end{infobox}
+
+\noindent\textbf{Exercise 8: Write a C program to calculate the factorial of a given number using a for loop. The factorial of a number is the product of all positive integers less than or equal to the number.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter a number: 5 \\
+    Factorial of 5 is 120
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 8]
+    #include <stdio.h>
+    
+    int main() {
+        int n, factorial = 1;
+        printf("Enter a number: ");
+        scanf("%d", &n);
+        for (int i = 1; i <= n; i++) {
+            factorial *= i;
+        }
+        printf("Factorial of %d is %d\n", n, factorial);
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 9: Write a C program to reverse a given number using a do-while loop.	Print the original and reversed numbers.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter a number: 1284 \\
+    Original number: 1284 \\
+    Reversed number: 4821
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 9]
+    #include <stdio.h>
+    
+    int main() {
+        int n, reversedNumber = 0, remainder;
+        printf("Enter a number: ");
+        scanf("%d", &n);
+        int originalNumber = n;
+        do {
+            remainder = n % 10;
+            reversedNumber = reversedNumber * 10 + remainder;
+            n /= 10;
+        } while (n != 0);
+        printf("Original number: %d\n", originalNumber);
+        printf("Reversed number: %d\n", reversedNumber);
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 10: Write a C program to count the number of digits in a given integer.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter an integer: 12948 \\
+    Number of digits: 5
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 10]
+    #include <stdio.h>
+    
+    int main() {
+        int n, count = 0;
+        printf("Enter an integer: ");
+        scanf("%d", &n);
+        while (n != 0) {
+            n /= 10;
+            count++;
+        }
+        printf("Number of digits: %d\n", count);
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 11: Create a program to find all prime numbers in a given range using nested loops and conditionals.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter the lower limit: 10 \\
+    Enter the upper limit: 50 \\
+    Prime numbers between 10 and 50 are: 11 13 17 19 23 29 31 37 41 43 47
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 11]
+    #include <stdio.h>
+    
+    int main() {
+        int lower, upper, isPrime;
+        printf("Enter the lower limit: ");
+        scanf("%d", &lower);
+        printf("Enter the upper limit: ");
+        scanf("%d", &upper);
+        printf("Prime numbers between %d and %d are: ", lower, upper);
+        for (int i = lower; i <= upper; i++) {
+            isPrime = 1;
+            for (int j = 2; j <= i / 2; j++) {
+                if (i % j == 0) {
+                    isPrime = 0;
+                    break;
+                }
+            }
+            if (isPrime && i != 1) {
+                printf("%d ", i);
+            }
+        }
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 12: Implement a program to repeatedly ask the user for a password until the correct one is entered.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter the password: 1234 \\
+    Incorrect password. Try again. \\
+    Enter the password: 5678 \\
+    Incorrect password. Try again. \\
+    Enter the password: 9876 \\
+    Correct password. Access granted.
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 12]
+    #include <stdio.h>
+    
+    int main() {
+        int password = 9876, input;
+        do {
+            printf("Enter the password: ");
+            scanf("%d", &input);
+            if (input != password) {
+                printf("Incorrect password. Try again.\n");
+            }
+        } while (input != password);
+        printf("Correct password. Access granted.\n");
+        return 0;
+    }
+\end{lstlisting}
+
+\noindent\textbf{Exercise 13: Write a program in C to find the number and sum of all integers between two which are divisible by 7.}
+\begin{tcolorbox}[colback=lightgray!10, colframe=black, title=Example Output]
+    Enter the lower limit: 10 \\
+    Enter the upper limit: 50 \\
+    Numbers between 10 and 50 divisible by 7: 14 21 28 35 42 49 \\
+    Sum of numbers between 10 and 50 divisible by 7: 189
+\end{tcolorbox}
+
+\begin{lstlisting}[language=C, gobble=0, caption=Solution to Exercise 13]
+    #include <stdio.h>
+    
+    int main() {
+        int lower, upper, sum = 0;
+        printf("Enter the lower limit: ");
+        scanf("%d", &lower);
+        printf("Enter the upper limit: ");
+        scanf("%d", &upper);
+        printf("Numbers between %d and %d divisible by 7: ", lower, upper);
+        for (int i = lower; i <= upper; i++) {
+            if (i % 7 == 0) {
+                printf("%d ", i);
+                sum += i;
+            }
+        }
+        printf("\nSum of numbers between %d and %d divisible by 7: %d\n", lower, upper, sum);
+        return 0;
+    }
+\end{lstlisting}
+
 
 
 
